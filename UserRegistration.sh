@@ -3,12 +3,13 @@ while [[ True ]]
 do
     echo "Choose any of the options below for validating your details:"
     echo "To enter first name select option 1 "
+    echo "To enter last name select option 2"
     echo "To exit select option 6"
     read -p "enter your option:" option
 
     case $option in
-        1)
-            #first name should start with capital letter and
+        1 | 2)
+            #it should start with capital letter and
             #has minimum 3 characters
             pattern_check="^[A-Z][a-zA-Z]{2,}$"
             ;;
@@ -21,7 +22,7 @@ do
             ;;
     esac
 
-    if [[ $option =~ ^[1]$ ]]
+    if [[ $option =~ ^[12]$ ]]
     then
         read -p "enter your input:" pattern_to_be_checked
         if [[ $pattern_to_be_checked =~ $pattern_check ]]
@@ -32,4 +33,4 @@ do
         fi
     fi
 
-done 
+done
