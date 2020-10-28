@@ -6,6 +6,7 @@ do
     echo "To enter last name select option 2"
     echo "To enter email select option 3"
     echo "To enter phone number select option 4"
+    echo "To enter password select option 5"
     echo "To exit select option 6"
     read -p "enter your option:" option
 
@@ -28,6 +29,10 @@ do
             pattern_check="^[0-9]{1,6}\s[0-9]{10}$"
             ;;
         5)
+            #password minimum lenth 8
+            pattern_check=".{8,}"
+            ;;
+        6)
             echo "exiting......"
             exit
             ;;
@@ -36,7 +41,7 @@ do
             ;;
     esac
 
-    if [[ $option =~ ^[1234]$ ]]
+    if [[ $option =~ ^[12345]$ ]]
     then
         read -p "enter your input:" pattern_to_be_checked
         if [[ $pattern_to_be_checked =~ $pattern_check ]]
@@ -47,4 +52,4 @@ do
         fi
     fi
 
-done
+done 
