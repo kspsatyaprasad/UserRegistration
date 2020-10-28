@@ -16,24 +16,29 @@ do
             #it should start with capital letter and
             #has minimum 3 characters
             pattern_check="^[A-Z][a-zA-Z]{2,}$"
+            echo -n "Entered name "
             ;;
         3)
             #abc.xyz@bl.co.in
             #email has 3 mandatory parts(abc,bl&co) and 2 optional
             #(xyz & in ) with precise @ and . postions
             pattern_check="^[a-z]{3,}(.[a-z]*)?@([a-z]){2,}.[a-z]+(.in)*"
+            echo -n "Entered email "
             ;;
         4)
             #phonenumber have country code and 10
             #digits with space seperated
             #country code can have 1 to 6 digits
             pattern_check="^[0-9]{1,6}\s[0-9]{10}$"
+            echo -n "Entered phone number "
             ;;
         5)
             #password minimum lenth 8
-            #atleast have 1 uppercase
-            #atlest have 1 numbers
-            pattern_check="(?=.*[A-Z])(?=.*[0-9]).{8,}"
+            #atleast have 1 uppercase letter
+            #atleast have 1 number
+            #atleast have 1 special symbol
+            pattern_check="(?=.*[A-Z])(?=.*[0-9])(?=.*[*.!@$%^&(){}[\]:;<>,.?\/~_+\-=|#]).{8,}"
+            echo -n " Entered password "
             #since =~ doesn't support lookheads
             #grep is used with -P for perl
             #regex engine
