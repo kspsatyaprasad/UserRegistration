@@ -9,6 +9,7 @@ do
     echo "To enter password select option 5"
     echo "To exit select option 6"
     read -p "enter your option:" option
+    read -p "enter your input:" pattern_to_be_checked
 
     case $option in
         1 | 2)
@@ -30,20 +31,31 @@ do
             ;;
         5)
             #password minimum lenth 8
-            pattern_check=".{8,}"
+            #atleast have 1 uppercase
+            pattern_check="(?=.{8,}).*[A-Z].*"
+            #since =~ doesn't support lookheads
+            #grep is used with -P for perl
+            #regex engine
+            result=$(echo $pattern_to_be_checked | grep -P $pattern_check)
+            if [ -z "${result}" ]
+            then
+                echo "$pattern_to_be_checked is not valid password";
+            else
+                echo "$pattern_to_be_checked is valid password";
+            fi
             ;;
         6)
             echo "exiting......"
-            exit
+            exit 2
             ;;
         *)
             echo 'Invalid entry.enter valid option'
             ;;
     esac
 
-    if [[ $option =~ ^[12345]$ ]]
+    if [[ $option =~ ^[1234]$ ]]
     then
-        read -p "enter your input:" pattern_to_be_checked
+
         if [[ $pattern_to_be_checked =~ $pattern_check ]]
         then
             echo "$pattern_to_be_checked is valid"
