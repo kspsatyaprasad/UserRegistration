@@ -5,6 +5,7 @@ do
     echo "To enter first name select option 1 "
     echo "To enter last name select option 2"
     echo "To enter email select option 3"
+    echo "To enter phone number select option 4"
     echo "To exit select option 6"
     read -p "enter your option:" option
 
@@ -20,6 +21,12 @@ do
             #(xyz & in ) with precise @ and . postions
             pattern_check="^[a-z]{3,}(.[a-z]*)?@([a-z]){2,}.[a-z]+(.in)*"
             ;;
+        4)
+            #phonenumber have country code and 10
+            #digits with space seperated
+            #country code can have 1 to 6 digits
+            pattern_check="^[0-9]{1,6}\s[0-9]{10}$"
+            ;;
         5)
             echo "exiting......"
             exit
@@ -29,7 +36,7 @@ do
             ;;
     esac
 
-    if [[ $option =~ ^[123]$ ]]
+    if [[ $option =~ ^[1234]$ ]]
     then
         read -p "enter your input:" pattern_to_be_checked
         if [[ $pattern_to_be_checked =~ $pattern_check ]]
@@ -40,4 +47,4 @@ do
         fi
     fi
 
-done 
+done
