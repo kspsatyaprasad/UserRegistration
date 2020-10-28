@@ -2,7 +2,7 @@
 while [[ True ]]
 do
     echo "Choose any of the options below for validating your details:"
-    echo "To enter first name select option 1 "
+    echo "To enter first name select option 1"
     echo "To enter last name select option 2"
     echo "To enter email select option 3"
     echo "To enter phone number select option 4"
@@ -13,61 +13,55 @@ do
 
     case $option in
         1 | 2)
+		    #following conditions should be satisfied
             #it should start with capital letter and
-            #has minimum 3 characters
+            #it should have minimum 3 characters
             pattern_check="^[A-Z][a-zA-Z]{2,}$"
             echo -n "Entered name "
             ;;
         3)
-            #abc.xyz@bl.co.in
+            #following conditions should be satisfied
             #email has 3 mandatory parts(abc,bl&co) and 2 optional
             #(xyz & in ) with precise @ and . postions
-            pattern_check="^[a-z]{3,}(.[a-z]*)?@([a-z]){2,}.[a-z]+(.in)*"
+            pattern_check="^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}+([.][a-zA-Z]{2,3})?$"
             echo -n "Entered email "
             ;;
         4)
-            #phonenumber have country code and 10
+            #following conditions should be satisfied
+			#phonenumber have country code and 10
             #digits with space seperated
             #country code can have 1 to 6 digits
             pattern_check="^[0-9]{1,6}\s[0-9]{10}$"
             echo -n "Entered phone number "
             ;;
         5)
-            #password minimum lenth 8
+            #following conditions should be satisfied
+			#password minimum lenth 8
             #atleast have 1 uppercase letter
             #atleast have 1 number
-            #atleast have 1 special symbol
+            #should have 1 special symbol
             pattern_check="(?=.*[A-Z])(?=.*[0-9])(?=.*[*.!@$%^&(){}[\]:;<>,.?\/~_+\-=|#]).{8,}"
-            echo -n " Entered password "
-            #since =~ doesn't support lookheads
-            #grep is used with -P for perl
-            #regex engine
-            result=$(echo $pattern_to_be_checked | grep -P $pattern_check)
-            if [ -z "${result}" ]
-            then
-                echo "$pattern_to_be_checked is not valid password";
-            else
-                echo "$pattern_to_be_checked is valid password";
-            fi
+            echo -n "Entered password "
             ;;
         6)
             echo "exiting......"
             exit 2
             ;;
         *)
-            echo 'Invalid entry.enter valid option'
+            echo "Invalid entry.enter valid option"
             ;;
     esac
 
-    if [[ $option =~ ^[1234]$ ]]
+    if [[ $option =~ ^[12345]$ ]]
     then
-
-        if [[ $pattern_to_be_checked =~ $pattern_check ]]
-        then
-            echo "$pattern_to_be_checked is valid"
-        else
-            echo "$pattern_to_be_checked is not valid"
-        fi
+            #=~ is not supporting lookheads so grep is used along with -P
+            resulting_pattern=$(echo $pattern_to_be_checked | grep -P $pattern_check)
+            if [ -z "${resulting_pattern}" ]
+            then
+                echo "$pattern_to_be_checked is not valid";
+            else
+                echo "$pattern_to_be_checked is valid";
+            fi
     fi
 
 done 
